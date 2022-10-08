@@ -15,7 +15,7 @@ import racingcar.view.Output;
 public class RaceManager {
 
 
-    public Cars addCars() {
+    public List<Car> addCars() {
         String carInput = Input.getCarListInput();
         validateCarListInput(carInput);
         return generateCarList(carInput);
@@ -27,7 +27,7 @@ public class RaceManager {
         return Integer.parseInt(trialInput);
     }
 
-    private Cars generateCarList(String carInput) {
+    private List<Car> generateCarList(String carInput) {
         String[] carNameArray = carInput.split(Rule.SEPARATOR);
         checkDuplicatedName(carNameArray);
         List<Car> carList = new ArrayList<>();
@@ -35,7 +35,7 @@ public class RaceManager {
             validateCarNameLength(carName);
             carList.add(new Car(carName));
         }
-        return new Cars(carList);
+        return carList;
     }
 
     private void checkDuplicatedName(String[] carNameArray) {
