@@ -46,6 +46,7 @@ public class RaceController {
         }catch (IllegalArgumentException e){
             Output.printErrorMsg(e.getMessage());
             startRace();
+            return;
         }
         race.start();
         if(race.isRaceOver()){
