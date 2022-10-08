@@ -1,5 +1,7 @@
 package racingcar.model.car;
 
+import racingcar.model.strategy.MoveStrategy;
+
 public class Car implements Comparable<Car> {
     private final CarName name;
     private final CarPosition position;
@@ -16,8 +18,10 @@ public class Car implements Comparable<Car> {
         return position.getCarPosition();
     }
 
-    public void move(){
-        position.moveOneStep();
+    public void move(MoveStrategy moveStrategy){
+        if(moveStrategy.isMovable()){
+            position.moveOneStep();
+        }
     }
 
     @Override

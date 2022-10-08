@@ -12,9 +12,7 @@ public class Cars {
 
     public void moveAll(MoveStrategy moveStrategy) {
         for(Car car: carList){
-            if(moveStrategy.isMovable()){
-                car.move();
-            }
+            car.move(moveStrategy);
         }
     }
 
