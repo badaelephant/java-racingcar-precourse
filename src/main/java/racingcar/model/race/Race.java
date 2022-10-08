@@ -5,17 +5,19 @@ import racingcar.model.car.Cars;
 import racingcar.model.strategy.MoveStrategy;
 import racingcar.view.Output;
 
-public class Race implements RaceInterface{
+/**
+ * 경기 객체
+ *
+ * @author YONGSEOK CHOI
+ * @version 1.0 2022.10.09
+ */
+public class Race implements RaceInterface {
 
-    private final Cars cars;
     private final int totalRound;
-    private final MoveStrategy moveStrategy;
     private final Record record;
     private final Round round;
 
-    public Race(MoveStrategy moveStrategy, Cars cars, int totalRound){
-        this.moveStrategy = moveStrategy;
-        this.cars = cars;
+    public Race(MoveStrategy moveStrategy, Cars cars, int totalRound) {
         this.totalRound = totalRound;
         this.record = new Record();
         this.round = new Round(cars, moveStrategy);
@@ -24,7 +26,7 @@ public class Race implements RaceInterface{
     @Override
     public void start() {
         Output.printRaceStart();
-        for(int i=1; i<totalRound+1; i++){
+        for (int i = 1; i < totalRound + 1; i++) {
             Result result = round.run(i);
             record.addRecord(result);
             result.printResult();

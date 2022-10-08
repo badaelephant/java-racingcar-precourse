@@ -1,10 +1,8 @@
 package racingcar.model.car;
 
 import org.junit.jupiter.api.Test;
-import static org.assertj.core.api.Assertions.assertThat;
 import racingcar.model.strategy.RandomNumberMoveStrategy;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 public class CarTest {
 
     @Test

@@ -9,7 +9,12 @@ import racingcar.model.car.Car;
 import racingcar.model.value.ErrorMsg;
 import racingcar.model.value.Rule;
 
-
+/**
+ * 경기 매니저 객체
+ *
+ * @author YONGSEOK CHOI
+ * @version 1.0 2022.10.09
+ */
 public class RaceManager {
 
     public List<Car> addCars(String carInput) {
@@ -28,7 +33,7 @@ public class RaceManager {
         String[] carNameArray = carInput.split(Rule.SEPARATOR);
         validateCarNameArray(carNameArray);
         List<Car> carList = new ArrayList<>();
-        for(String carName: carNameArray){
+        for (String carName : carNameArray) {
             validateCarNameLength(carName);
             carList.add(new Car(carName));
         }
@@ -41,36 +46,36 @@ public class RaceManager {
         if (carNameList.size() != carNames.size()) {
             throw new IllegalArgumentException(ErrorMsg.DUPLICATE_NAME);
         }
-        if(carNameArray.length<2){
+        if (carNameArray.length < 2) {
             throw new IllegalArgumentException(ErrorMsg.ONE_CAR_NAME);
         }
     }
 
     private void validateCarNameLength(String carName) {
-        if(carName.length()>5){
+        if (carName.length() > 5) {
             throw new IllegalArgumentException(ErrorMsg.OVER_NAME_LENGTH);
         }
-        if(carName.length()==0 || carName.isEmpty() || carName == null){
+        if (carName.length() == 0 || carName.isEmpty() || carName == null) {
             throw new IllegalArgumentException(ErrorMsg.BLANK_NAME);
         }
     }
+
     private void validateCarListInput(String carInput) {
         System.out.println(carInput);
-        if(carInput == null || carInput.isEmpty()){
+        if (carInput == null || carInput.isEmpty()) {
             throw new IllegalArgumentException(ErrorMsg.EMPTY_INPUT);
         }
     }
 
 
-
     private void validateTrialInput(String trialInput) {
-        if(trialInput == null || trialInput.isEmpty()){
+        if (trialInput == null || trialInput.isEmpty()) {
             throw new IllegalArgumentException(ErrorMsg.EMPTY_INPUT);
         }
-        if(!trialInput.matches("[0-9]+")){
+        if (!trialInput.matches("[0-9]+")) {
             throw new IllegalArgumentException(ErrorMsg.WRONG_TYPE);
         }
-        if(Integer.parseInt(trialInput) <= 0){
+        if (Integer.parseInt(trialInput) <= 0) {
             throw new IllegalArgumentException(ErrorMsg.INPUT_ZERO);
         }
     }

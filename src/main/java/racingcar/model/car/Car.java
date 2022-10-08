@@ -2,9 +2,17 @@ package racingcar.model.car;
 
 import racingcar.model.strategy.MoveStrategy;
 
+/**
+ * 자동차 객체
+ *
+ * @author YONGSEOK CHOI
+ * @version 1.0 2022.10.09
+ */
 public class Car implements Comparable<Car> {
+
     private final CarName name;
     private final CarPosition position;
+
     public Car(String name) {
         this.name = new CarName(name);
         this.position = new CarPosition();
@@ -18,14 +26,14 @@ public class Car implements Comparable<Car> {
         return position.getCarPosition();
     }
 
-    public void move(MoveStrategy moveStrategy){
-        if(moveStrategy.isMovable()){
+    public void move(MoveStrategy moveStrategy) {
+        if (moveStrategy.isMovable()) {
             position.moveOneStep();
         }
     }
 
     @Override
-    public int compareTo(Car c){
+    public int compareTo(Car c) {
         return Integer.compare(this.getPosition(), c.getPosition());
     }
 

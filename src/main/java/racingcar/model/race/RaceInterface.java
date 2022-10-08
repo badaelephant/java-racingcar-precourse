@@ -1,17 +1,21 @@
 package racingcar.model.race;
 
-
 import java.util.List;
-import racingcar.model.car.Cars;
 
+/**
+ * 경기 인터페이스
+ *
+ * @author YONGSEOK CHOI
+ * @version 1.0 2022.10.09
+ */
 public interface RaceInterface {
 
-    public void start();
+    void start();
 
-    public void announceFinalWinner(List<String> winners);
+    void announceFinalWinner(List<String> winners);
 
-    public boolean isRaceOver();
+    boolean isRaceOver();
 
-    public Record getRaceRecord();
+    Record getRaceRecord();
 
 }

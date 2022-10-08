@@ -9,30 +9,35 @@ import racingcar.model.race.RaceManager;
 import racingcar.model.race.Record;
 import racingcar.model.race.Result;
 import racingcar.model.strategy.MoveStrategy;
-import racingcar.model.strategy.RandomNumberMoveStrategy;
 import racingcar.view.Input;
 import racingcar.view.Output;
 
+/**
+ * 레이스 컨트롤러
+ *
+ * @author YONGSEOK CHOI
+ * @version 1.0 2022.10.09
+ */
 public class RaceController {
+
     private Race race;
     private final RaceManager raceManager;
     private final MoveStrategy moveStrategy;
 
-    private int createStep = 0;
-
     private List<Car> carList = new ArrayList<>();
     private int totalRound = 0;
 
-    public RaceController(MoveStrategy moveStrategy){
+    public RaceController(MoveStrategy moveStrategy) {
         this.raceManager = new RaceManager();
         this.moveStrategy = moveStrategy;
     }
-    private void createRace(){
-        if(carList.isEmpty()){
+
+    private void createRace() {
+        if (carList.isEmpty()) {
             String carInput = Input.getCarListInput();
             carList = raceManager.addCars(carInput);
         }
-        if(totalRound==0){
+        if (totalRound == 0) {
             String trialInput = Input.getRaceTrialInput();
             totalRound = raceManager.addTotalRound(trialInput);
         }
@@ -41,15 +46,15 @@ public class RaceController {
     }
 
     public void startRace() {
-        try{
+        try {
             createRace();
-        }catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             Output.printErrorMsg(e.getMessage());
             startRace();
             return;
         }
         race.start();
-        if(race.isRaceOver()){
+        if (race.isRaceOver()) {
             Record record = race.getRaceRecord();
             Result result = record.getFinalResult();
             List<String> winners = result.getWinners();

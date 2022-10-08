@@ -1,12 +1,9 @@
 package racingcar.model.race;
 
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import racingcar.model.value.ErrorMsg;
-import racingcar.model.value.Rule;
-import racingcar.view.Output;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
@@ -15,8 +12,8 @@ public class RaceManagerTest {
     @ParameterizedTest
     @ValueSource(strings = {"", " ",})
     @DisplayName(value = "자동차이름 빈문자열입력")
-    void 차이름_빈문자열_입력_예외발생_테스트(String carName){
-        assertThatThrownBy(()-> {
+    void 차이름_빈문자열_입력_예외발생_테스트(String carName) {
+        assertThatThrownBy(() -> {
             RaceManager raceManager = new RaceManager();
             raceManager.addCars(carName);
         }).isInstanceOf(IllegalArgumentException.class)
@@ -26,8 +23,8 @@ public class RaceManagerTest {
     @ParameterizedTest
     @ValueSource(strings = {"페라리", "마이바흐", "테슬라", "람보르기니"})
     @DisplayName(value = "이름 1개로 자동차이름 생성")
-    void 자동차_한대만_입력_예외발생_테스트(String carName){
-        assertThatThrownBy(()-> {
+    void 자동차_한대만_입력_예외발생_테스트(String carName) {
+        assertThatThrownBy(() -> {
             RaceManager raceManager = new RaceManager();
             raceManager.addCars(carName);
         }).isInstanceOf(IllegalArgumentException.class)
@@ -37,38 +34,41 @@ public class RaceManagerTest {
     @ParameterizedTest
     @ValueSource(strings = {"ferrari,마이바흐533", "테슬라,람보르기니윙도어"})
     @DisplayName(value = "자동차이름길이 초과")
-    void 자동차_이름길이_초과_예외발생_테스트(String carName){
-        assertThatThrownBy(()-> {
+    void 자동차_이름길이_초과_예외발생_테스트(String carName) {
+        assertThatThrownBy(() -> {
             RaceManager raceManager = new RaceManager();
             raceManager.addCars(carName);
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(ErrorMsg.OVER_NAME_LENGTH);
     }
+
     @ParameterizedTest
     @ValueSource(strings = {"테슬라,테슬라", "테슬라,람보르기니,벤츠,람보르기니"})
     @DisplayName(value = "자동차이름 중복입력")
-    void 자동차_이름_중복입력_예외발생_테스트(String carName){
-        assertThatThrownBy(()-> {
+    void 자동차_이름_중복입력_예외발생_테스트(String carName) {
+        assertThatThrownBy(() -> {
             RaceManager raceManager = new RaceManager();
             raceManager.addCars(carName);
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(ErrorMsg.DUPLICATE_NAME);
     }
+
     @ParameterizedTest
     @ValueSource(strings = {",마이바흐", ",테슬라"})
     @DisplayName(value = "자동차이름 비었을때")
-    void 자동차_이름_없을때_테스트(String carName){
-        assertThatThrownBy(()-> {
+    void 자동차_이름_없을때_테스트(String carName) {
+        assertThatThrownBy(() -> {
             RaceManager raceManager = new RaceManager();
             raceManager.addCars(carName);
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(ErrorMsg.BLANK_NAME);
     }
+
     @ParameterizedTest
     @ValueSource(strings = {"마이바흐,", "테슬라,"})
     @DisplayName(value = "맨 끝에 쉼표는 없는 취급한다.")
-    void 맨끝_쉼표_무시_테스트(String carName){
-        assertThatThrownBy(()-> {
+    void 맨끝_쉼표_무시_테스트(String carName) {
+        assertThatThrownBy(() -> {
             RaceManager raceManager = new RaceManager();
             raceManager.addCars(carName);
         }).isInstanceOf(IllegalArgumentException.class)
@@ -78,28 +78,30 @@ public class RaceManagerTest {
     @ParameterizedTest
     @ValueSource(strings = {"  ", ""})
     @DisplayName(value = "시도횟수 빈문자열테스트")
-    void 시도횟수_빈문자열_예외발생_테스트(String trial){
-        assertThatThrownBy(()-> {
+    void 시도횟수_빈문자열_예외발생_테스트(String trial) {
+        assertThatThrownBy(() -> {
             RaceManager raceManager = new RaceManager();
             raceManager.addTotalRound(trial);
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(ErrorMsg.EMPTY_INPUT);
     }
+
     @ParameterizedTest
     @ValueSource(strings = {"aa", "1a3", "3.3", "-12"})
     @DisplayName(value = "시도횟수 타입 예외발생 테스트")
-    void 시도횟수_타입_예외발생_테스트(String trial){
-        assertThatThrownBy(()-> {
+    void 시도횟수_타입_예외발생_테스트(String trial) {
+        assertThatThrownBy(() -> {
             RaceManager raceManager = new RaceManager();
             raceManager.addTotalRound(trial);
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(ErrorMsg.WRONG_TYPE);
     }
+
     @ParameterizedTest
     @ValueSource(strings = {"0"})
     @DisplayName(value = "시도횟수 0 예외발생테스트")
-    void 시도횟수_0회이하_예외발생_테스트(String trial){
-        assertThatThrownBy(()-> {
+    void 시도횟수_0회이하_예외발생_테스트(String trial) {
+        assertThatThrownBy(() -> {
             RaceManager raceManager = new RaceManager();
             raceManager.addTotalRound(trial);
         }).isInstanceOf(IllegalArgumentException.class)
