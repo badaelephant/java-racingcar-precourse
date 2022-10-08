@@ -22,7 +22,7 @@ public class Race implements RaceInterface{
     }
 
     @Override
-    public void start(int totalRound) {
+    public void start() {
         Output.printRaceStart();
         for(int i=1; i<totalRound+1; i++){
             Result result = round.run(i);
