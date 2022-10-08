@@ -15,5 +15,8 @@ public class Rule {
 
     public static final int START_ROUND_NO = 1;
 
+    public static final int MAX_RETRY = 5;
     public static final String SEPARATOR = ",";
+
+
 }
