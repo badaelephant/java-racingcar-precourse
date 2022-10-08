@@ -1,6 +1,7 @@
 package racingcar.model.car;
 
 import java.util.List;
+import racingcar.model.strategy.MoveStrategy;
 
 public class Cars {
     private final List<Car> carList;
@@ -9,10 +10,11 @@ public class Cars {
         this.carList = carList;
     }
 
-    public void moveAll() {
-        //TODO MoveStrategy 관련 코드 추가 필요
+    public void moveAll(MoveStrategy moveStrategy) {
         for(Car car: carList){
-            car.move();
+            if(moveStrategy.isMovable()){
+                car.move();
+            }
         }
     }
 
