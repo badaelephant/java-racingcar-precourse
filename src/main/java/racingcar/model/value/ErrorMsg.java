@@ -11,7 +11,7 @@ public class ErrorMsg {
     public static final String DUPLICATE_NAME = "차 이름은 중복될 수 없습니다.";
     public static final String OVER_NAME_LENGTH = "차 이름은 5글자를 초과할 수 없습니다. 5글자 이하로 입력해주세요.";
 
-    public static final String WRONG_TYPE = "시도횟수는 숫자여야합니다. 숫자를 입력해주세요";
+    public static final String WRONG_TYPE = "시도횟수는 1이상 숫자여야합니다.";
     public static final String INPUT_ZERO = "시도횟수는 1회이상이어야 합니다.";
 
 
