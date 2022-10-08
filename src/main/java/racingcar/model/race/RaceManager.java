@@ -70,7 +70,7 @@ public class RaceManager {
         if(!trialInput.matches("[0-9]+")){
             throw new IllegalArgumentException(ErrorMsg.WRONG_TYPE);
         }
-        if(Integer.parseInt(trialInput) == 0){
+        if(Integer.parseInt(trialInput) <= 0){
             throw new IllegalArgumentException(ErrorMsg.INPUT_ZERO);
         }
     }
