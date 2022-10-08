@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 import racingcar.model.car.Car;
 import racingcar.model.car.Cars;
+import racingcar.view.Output;
 
 public class Result {
 
@@ -36,5 +37,10 @@ public class Result {
         if(car.getPosition() == winPosition) {
             winners.add(car.getName());
         }
+    }
+
+    public void printResult(){
+
+        Output.printRoundResult(cars.getCarList());
     }
 }
