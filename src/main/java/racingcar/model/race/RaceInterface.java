@@ -6,7 +6,7 @@ import racingcar.model.car.Cars;
 
 public interface RaceInterface {
 
-    public void start(int totalRound);
+    public void start();
 
     public void announceFinalWinner(List<String> winners);
 
