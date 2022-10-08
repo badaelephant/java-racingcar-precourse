@@ -13,45 +13,18 @@ import racingcar.view.Input;
 import racingcar.view.Output;
 
 public class RaceManager {
-    private Cars cars;
-    private int totalRound;
 
-    public void prepareRace() {
-        int retryCount = 0;
-        boolean needRetry = true;
-        while(needRetry && retryCount<Rule.MAX_RETRY){
-            needRetry = tryAddCars();
-        }
-        needRetry = false;
-        retryCount = 0;
-        while(needRetry && retryCount<Rule.MAX_RETRY){
-            needRetry = tryAddTotalRound();
-        }
-    }
-    private boolean tryAddCars(){
-        try{
-            addCars();
-            return true;
-        }catch (IllegalArgumentException e){
-            Output.printErrorMsg(e.getMessage());
-            return false;
-        }
-    }
-    private boolean tryAddTotalRound(){
-        try{
-            addTotalRound();
-            return true;
 
-        }catch (IllegalArgumentException e){
-            Output.printErrorMsg(e.getMessage());
-            return false;
-        }
-    }
-
-    private void addCars() {
+    public Cars addCars() {
         String carInput = Input.getCarListInput();
         validateCarListInput(carInput);
-        cars = generateCarList(carInput);
+        return generateCarList(carInput);
+    }
+
+    public int addTotalRound() {
+        String trialInput = Input.getRaceTrialInput();
+        validateTrialInput(trialInput);
+        return Integer.parseInt(trialInput);
     }
 
     private Cars generateCarList(String carInput) {
@@ -79,6 +52,7 @@ public class RaceManager {
         }
     }
     private void validateCarListInput(String carInput) {
+        System.out.println(carInput);
         if(carInput == null || carInput.isEmpty()){
             throw new IllegalArgumentException(ErrorMsg.EMPTY_INPUT);
         }
@@ -87,11 +61,7 @@ public class RaceManager {
         }
     }
 
-    private void addTotalRound() {
-        String trialInput = Input.getRaceTrialInput();
-        validateTrialInput(trialInput);
-        totalRound = Integer.parseInt(trialInput);
-    }
+
 
     private void validateTrialInput(String trialInput) {
         if(trialInput == null || trialInput.isEmpty()){
@@ -104,4 +74,5 @@ public class RaceManager {
             throw new IllegalArgumentException(ErrorMsg.INPUT_ZERO);
         }
     }
+
 }
