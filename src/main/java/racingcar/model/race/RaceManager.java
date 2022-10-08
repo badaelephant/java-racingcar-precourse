@@ -15,14 +15,12 @@ import racingcar.view.Output;
 public class RaceManager {
 
 
-    public List<Car> addCars() {
-        String carInput = Input.getCarListInput();
+    public List<Car> addCars(String carInput) {
         validateCarListInput(carInput);
         return generateCarList(carInput);
     }
 
-    public int addTotalRound() {
-        String trialInput = Input.getRaceTrialInput();
+    public int addTotalRound(String trialInput) {
         validateTrialInput(trialInput);
         return Integer.parseInt(trialInput);
     }

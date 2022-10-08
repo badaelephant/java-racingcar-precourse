@@ -10,6 +10,7 @@ import racingcar.model.race.Record;
 import racingcar.model.race.Result;
 import racingcar.model.strategy.MoveStrategy;
 import racingcar.model.strategy.RandomNumberMoveStrategy;
+import racingcar.view.Input;
 import racingcar.view.Output;
 
 public class RaceController {
@@ -28,10 +29,12 @@ public class RaceController {
     }
     private void createRace(){
         if(carList.isEmpty()){
-            carList = raceManager.addCars();
+            String carInput = Input.getCarListInput();
+            carList = raceManager.addCars(carInput);
         }
         if(totalRound==0){
-            totalRound = raceManager.addTotalRound();
+            String trialInput = Input.getRaceTrialInput();
+            totalRound = raceManager.addTotalRound(trialInput);
         }
         Cars cars = new Cars(carList);
         race = new Race(moveStrategy, cars, totalRound);
