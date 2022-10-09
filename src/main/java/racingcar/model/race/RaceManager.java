@@ -29,9 +29,11 @@ public class RaceManager {
         return new Trial(trialInput);
     }
 
+
     private void validateStringInput(final String carInput) {
         if (carInput == null || carInput.isEmpty()) {
             throw new IllegalArgumentException(ErrorMsg.EMPTY_INPUT);
         }
     }
+
 }

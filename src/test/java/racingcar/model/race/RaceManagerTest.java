@@ -10,14 +10,14 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 public class RaceManagerTest {
 
     @ParameterizedTest
-    @ValueSource(strings = {"", " ",})
-    @DisplayName(value = "자동차이름 빈문자열입력")
-    void 차이름_빈문자열_입력_예외발생_테스트(String carName) {
+    @ValueSource(strings = {"테 슬 라", "마 이바흐",})
+    @DisplayName(value = "자동차이름 whitespace 예외발생")
+    void 차이름_공백_입력_예외발생_테스트(String carName) {
         assertThatThrownBy(() -> {
             RaceManager raceManager = new RaceManager();
             raceManager.addCars(carName);
         }).isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(ErrorMsg.EMPTY_INPUT);
+                .hasMessage(ErrorMsg.WHITE_SPACE);
     }
 
     @ParameterizedTest
@@ -39,7 +39,7 @@ public class RaceManagerTest {
             RaceManager raceManager = new RaceManager();
             raceManager.addCars(carName);
         }).isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(ErrorMsg.OVER_NAME_LENGTH);
+                .hasMessage(ErrorMsg.CAR_NAME_LENGTH_NO_MATCH);
     }
 
     @ParameterizedTest
@@ -61,7 +61,7 @@ public class RaceManagerTest {
             RaceManager raceManager = new RaceManager();
             raceManager.addCars(carName);
         }).isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(ErrorMsg.BLANK_NAME);
+                .hasMessage(ErrorMsg.CAR_NAME_LENGTH_NO_MATCH);
     }
 
     @ParameterizedTest
@@ -76,23 +76,12 @@ public class RaceManagerTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"  ", ""})
-    @DisplayName(value = "시도횟수 빈문자열테스트")
-    void 시도횟수_빈문자열_예외발생_테스트(String trial) {
-        assertThatThrownBy(() -> {
-            RaceManager raceManager = new RaceManager();
-            raceManager.addTotalRound(trial);
-        }).isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(ErrorMsg.EMPTY_INPUT);
-    }
-
-    @ParameterizedTest
     @ValueSource(strings = {"aa", "1a3", "3.3", "-12"})
     @DisplayName(value = "시도횟수 타입 예외발생 테스트")
     void 시도횟수_타입_예외발생_테스트(String trial) {
         assertThatThrownBy(() -> {
             RaceManager raceManager = new RaceManager();
-            raceManager.addTotalRound(trial);
+            raceManager.addTrial(trial);
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(ErrorMsg.WRONG_TYPE);
     }
@@ -103,8 +92,8 @@ public class RaceManagerTest {
     void 시도횟수_0회이하_예외발생_테스트(String trial) {
         assertThatThrownBy(() -> {
             RaceManager raceManager = new RaceManager();
-            raceManager.addTotalRound(trial);
+            raceManager.addTrial(trial);
         }).isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(ErrorMsg.INPUT_ZERO);
+                .hasMessage(ErrorMsg.WRONG_TYPE);
     }
 }

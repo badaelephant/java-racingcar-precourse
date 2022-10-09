@@ -9,7 +9,5 @@ public class Application {
         MoveStrategy moveStrategy = new RandomNumberMoveStrategy();
         RaceController raceController = new RaceController(moveStrategy);
         raceController.startRace();
-        
-
     }
 }

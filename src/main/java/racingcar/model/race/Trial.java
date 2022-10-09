@@ -7,11 +7,12 @@ public class Trial {
 
     private static final String TRIAL_PATTERN = "^[1-9][0-9]*$";
 
-    private int trial = Rule.DEFAULT_TRIAL;
+    private int trial;
 
     public Trial(final String trialInput) {
+        trial = Rule.DEFAULT_TRIAL;
         validateTrialInput(trialInput);
-        this.trial = Integer.parseInt(trialInput);
+        trial = Integer.parseInt(trialInput);
     }
 
     private void validateTrialInput(String trialInput) {
@@ -24,7 +25,5 @@ public class Trial {
         return trial;
     }
 
-    public boolean isNotSet(){
-        return trial == Rule.DEFAULT_TRIAL;
-    }
+
 }

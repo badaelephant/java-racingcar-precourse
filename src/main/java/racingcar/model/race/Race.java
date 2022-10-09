@@ -3,6 +3,7 @@ package racingcar.model.race;
 import java.util.List;
 import racingcar.model.car.Cars;
 import racingcar.model.strategy.MoveStrategy;
+import racingcar.model.value.ErrorMsg;
 import racingcar.view.Output;
 
 /**
@@ -28,64 +29,68 @@ public class Race implements RaceInterface {
 
     @Override
     public void start() {
+        if (this.raceStatus != RaceStatus.READY) {
+            throw new IllegalStateException(ErrorMsg.CANNOT_START_RACE_NO_READY);
+        }
+        ;
         this.raceStatus = RaceStatus.DRIVING;
         Output.printRaceStart();
         for (int i = 1; i < trial.getTotalTrial() + 1; i++) {
-            Result result = runNthRound(i);
-            record.addRecord(result);
-            result.printResult();
+            runNthRound(i);
         }
         this.raceStatus = RaceStatus.RACE_OVER;
     }
-    private Result runNthRound(int round) {
+
+    private void runNthRound(int round) {
         cars.moveAll(moveStrategy);
-        return new Result(round, cars);
+        Result result = new Result(round, cars);
+        record.addRecord(result);
+        result.printResult();
     }
 
     @Override
     public void announceFinalWinner() {
-        if (isRaceOver()) {
-            Result result = record.getFinalResult();
-            List<String> winners =  result.getWinners();
-            Output.printRaceFinalWinner(winners);
+        if (!isRaceOver()) {
+            throw new IllegalStateException(ErrorMsg.CANNOT_ANNOUNCE_FINAL_WINNER);
         }
+        Result result = record.getFinalResult();
+        List<String> winners = result.getWinners();
+        Output.printRaceFinalWinner(winners);
     }
 
     @Override
     public boolean isRaceOver() {
         return this.raceStatus == RaceStatus.RACE_OVER;
     }
+
     @Override
     public boolean isRaceReady() {
         return this.raceStatus == RaceStatus.READY;
     }
 
-    public boolean isCarRegisterd(){
-        return this.raceStatus == RaceStatus.CAR_REGISTERED;
+
+    @Override
+    public Record getRaceRecord() {
+        return record;
     }
 
     @Override
-    public boolean isRaceDriving() {
-        return this.raceStatus == RaceStatus.DRIVING;
-    }
-
-    @Override
-    public void registerRaceCars(Cars cars) {
+    public void setupCars(Cars cars) {
         this.cars = cars;
-        carRegisterd();
+        this.raceStatus = RaceStatus.CAR_SETUP;
     }
 
     @Override
-    public void registerTrial(Trial trial) {
+    public void setupTrial(Trial trial) {
         this.trial = trial;
-        trialRegisterd();
-    }
-
-
-    private void carRegisterd() {
-        this.raceStatus = RaceStatus.CAR_REGISTERED;
-    }
-    public void trialRegisterd() {
         this.raceStatus = RaceStatus.READY;
+    }
+
+    public boolean requireCarSetUp() {
+        return this.raceStatus == RaceStatus.PREPARING;
+    }
+
+    public boolean requireTrialSetup() {
+        return this.raceStatus == RaceStatus.CAR_SETUP;
     }
 }

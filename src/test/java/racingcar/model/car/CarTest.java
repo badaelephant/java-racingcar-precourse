@@ -13,11 +13,11 @@ public class CarTest {
 
         strategy.setMoveLimit(0);
         moveCar.move(strategy);
-        assertEquals(moveCar.getPosition(),1);
+        assertEquals(moveCar.getCarPosition(),1);
 
         strategy.setMoveLimit(10);
         stopCar.move(strategy);
-        assertEquals(stopCar.getPosition(),0);
+        assertEquals(stopCar.getCarPosition(),0);
     }
 
 }

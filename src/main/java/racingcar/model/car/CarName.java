@@ -24,13 +24,13 @@ public class CarName {
     }
 
     private void validateCarNameLength(final String name) {
-        if(name.length() < Rule.MIN_NAME_LENGTH || name.length() > Rule.MAX_NAME_LENGTH){
+        if (name.length() < Rule.MIN_NAME_LENGTH || name.length() > Rule.MAX_NAME_LENGTH) {
             throw new IllegalArgumentException(ErrorMsg.CAR_NAME_LENGTH_NO_MATCH);
         }
     }
 
     private void validateWhiteSpace(final String name) {
-        if(name.contains(WHITE_SPACE)){
+        if (name.contains(WHITE_SPACE)) {
             throw new IllegalArgumentException(ErrorMsg.WHITE_SPACE);
         }
     }
@@ -38,16 +38,5 @@ public class CarName {
     public String getName() {
         return name;
     }
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        CarName carName = (CarName) o;
-        return Objects.equals(getName(), carName.getName());
-    }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(getName());
-    }
 }

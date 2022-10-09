@@ -20,4 +20,6 @@ public class Record {
     public void addRecord(Result result) {
         record.add(result);
     }
+
+    public int getRecordSize(){return record.size();}
 }

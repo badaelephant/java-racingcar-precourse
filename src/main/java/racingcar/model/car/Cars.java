@@ -56,8 +56,5 @@ public class Cars {
 
     public int getCarListSize(){ return carList.size();}
 
-    public boolean isEmpty(){
-        return this.carList.size() == 0;
-    }
 
 }

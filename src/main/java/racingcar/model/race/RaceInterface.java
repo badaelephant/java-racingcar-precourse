@@ -19,11 +19,8 @@ public interface RaceInterface {
 
     boolean isRaceReady();
 
-    boolean isRaceDriving();
+    Record getRaceRecord();
 
-    void registerRaceCars(Cars cars);
-
-    void registerTrial(Trial trial);
-
-
+    void setupCars(Cars cars);
+    void setupTrial(Trial trial);
 }
