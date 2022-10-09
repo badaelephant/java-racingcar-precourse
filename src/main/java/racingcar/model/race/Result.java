@@ -35,15 +35,15 @@ public class Result {
     private void checkWinner() {
         List<Car> carList = cars.getCarList();
         Collections.sort(carList, Collections.reverseOrder());
-        int winPosition = carList.get(0).getPosition();
+        int winPosition = carList.get(0).getCarPosition();
         for (Car car : carList) {
             checkCoWinnerAndAddWinner(winPosition, car);
         }
     }
 
     private void checkCoWinnerAndAddWinner(int winPosition, Car car) {
-        if (car.getPosition() == winPosition) {
-            winners.add(car.getName());
+        if (car.getCarPosition() == winPosition) {
+            winners.add(car.getCarName());
         }
     }
 

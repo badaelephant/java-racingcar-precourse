@@ -57,7 +57,7 @@ public class Output {
 
 
     private static void printRoundResultByCar(Car car) {
-        System.out.println(String.format("%s : %s", car.getName(), printCarPosition(car.getPosition())));
+        System.out.println(String.format("%s : %s", car.getCarName(), printCarPosition(car.getCarPosition())));
     }
 
     private static String printCarPosition(int position) {

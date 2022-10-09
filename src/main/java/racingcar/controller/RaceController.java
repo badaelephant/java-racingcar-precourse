@@ -8,7 +8,9 @@ import racingcar.model.race.Race;
 import racingcar.model.race.RaceManager;
 import racingcar.model.race.Record;
 import racingcar.model.race.Result;
+import racingcar.model.race.Trial;
 import racingcar.model.strategy.MoveStrategy;
+import racingcar.model.value.Rule;
 import racingcar.view.Input;
 import racingcar.view.Output;
 
@@ -19,32 +21,32 @@ import racingcar.view.Output;
  * @version 1.0 2022.10.09
  */
 public class RaceController {
-
-    private Race race;
+    private final Race race;
     private final RaceManager raceManager;
-    private final MoveStrategy moveStrategy;
-
-    private List<Car> carList = new ArrayList<>();
-    private int totalRound = 0;
 
     public RaceController(MoveStrategy moveStrategy) {
         this.raceManager = new RaceManager();
-        this.moveStrategy = moveStrategy;
+        this.race = new Race(moveStrategy);
     }
 
     private void createRace() {
-        if (carList.isEmpty()) {
-            String carInput = Input.getCarListInput();
-            carList = raceManager.addCars(carInput);
-        }
-        if (totalRound == 0) {
-            String trialInput = Input.getRaceTrialInput();
-            totalRound = raceManager.addTotalRound(trialInput);
-        }
-        Cars cars = new Cars(carList);
-        race = new Race(moveStrategy, cars, totalRound);
+        registerCars();
+        registerTrial();
     }
-
+    private void registerCars(){
+        if(!race.isCarRegisterd()){
+            String carInput = Input.getCarListInput().trim();
+            Cars cars = raceManager.addCars(carInput);
+            race.registerRaceCars(cars);
+        }
+    }
+    private void registerTrial(){
+        if(!race.isRaceReady()){
+            String trialInput = Input.getRaceTrialInput().trim();
+            Trial trial = raceManager.addTrial(trialInput);
+            race.registerTrial(trial);
+        }
+    }
     public void startRace() {
         try {
             createRace();
@@ -54,11 +56,6 @@ public class RaceController {
             return;
         }
         race.start();
-        if (race.isRaceOver()) {
-            Record record = race.getRaceRecord();
-            Result result = record.getFinalResult();
-            List<String> winners = result.getWinners();
-            race.announceFinalWinner(winners);
-        }
+        race.announceFinalWinner();
     }
 }

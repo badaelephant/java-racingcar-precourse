@@ -1,6 +1,7 @@
 package racingcar.model.race;
 
 import java.util.List;
+import racingcar.model.car.Cars;
 
 /**
  * 경기 인터페이스
@@ -12,10 +13,17 @@ public interface RaceInterface {
 
     void start();
 
-    void announceFinalWinner(List<String> winners);
+    void announceFinalWinner();
 
     boolean isRaceOver();
 
-    Record getRaceRecord();
+    boolean isRaceReady();
+
+    boolean isRaceDriving();
+
+    void registerRaceCars(Cars cars);
+
+    void registerTrial(Trial trial);
+
 
 }

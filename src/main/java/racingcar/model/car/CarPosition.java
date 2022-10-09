@@ -1,5 +1,6 @@
 package racingcar.model.car;
 
+import java.util.Objects;
 import racingcar.model.value.Rule;
 
 /**
@@ -20,8 +21,29 @@ public class CarPosition {
         position += Rule.ONE_STEP;
     }
 
-
-    public int getCarPosition() {
+    public int getPosition() {
         return position;
+    }
+
+    public boolean biggerThan(final CarPosition carPosition) {
+        return this.position > carPosition.position;
+    }
+
+    public boolean lesserThan(final CarPosition carPosition) {
+        return this.position < carPosition.position;
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CarPosition carPosition = (CarPosition) o;
+        return position == carPosition.position;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(position);
     }
 }
