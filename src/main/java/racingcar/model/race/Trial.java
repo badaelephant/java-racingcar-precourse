@@ -15,15 +15,13 @@ public class Trial {
         trial = Integer.parseInt(trialInput);
     }
 
-    private void validateTrialInput(String trialInput) {
+    private void validateTrialInput(final String trialInput) {
         if (!trialInput.matches(TRIAL_PATTERN)) {
             throw new IllegalArgumentException(ErrorMsg.WRONG_TYPE);
         }
     }
 
-    public int getTotalTrial() {
-        return trial;
+    public boolean biggerThan(int i) {
+        return trial>i;
     }
-
-
 }

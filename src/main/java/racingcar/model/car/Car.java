@@ -19,12 +19,12 @@ public class Car implements Comparable<Car> {
         this.position = new CarPosition();
     }
 
-    public String getCarName() {
-        return name.getName();
+    public CarName getCarName() {
+        return name;
     }
 
-    public int getCarPosition() {
-        return position.getPosition();
+    public CarPosition getCarPosition() {
+        return position;
     }
 
     public void move(MoveStrategy moveStrategy) {
@@ -35,7 +35,9 @@ public class Car implements Comparable<Car> {
 
     @Override
     public int compareTo(Car c) {
-        return Integer.compare(this.getCarPosition(), c.getCarPosition());
+        if(this.position.lesserThan(c.position))//길이 비교
+            return -1;
+        return 1;
     }
 
     @Override

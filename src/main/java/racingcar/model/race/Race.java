@@ -1,6 +1,7 @@
 package racingcar.model.race;
 
 import java.util.List;
+import racingcar.model.car.Car;
 import racingcar.model.car.Cars;
 import racingcar.model.strategy.MoveStrategy;
 import racingcar.model.value.ErrorMsg;
@@ -35,8 +36,8 @@ public class Race implements RaceInterface {
         ;
         this.raceStatus = RaceStatus.DRIVING;
         Output.printRaceStart();
-        for (int i = 1; i < trial.getTotalTrial() + 1; i++) {
-            runNthRound(i);
+        for (int i = 0; trial.biggerThan(i); i++) {
+            runNthRound(i+1);
         }
         this.raceStatus = RaceStatus.RACE_OVER;
     }
@@ -54,7 +55,7 @@ public class Race implements RaceInterface {
             throw new IllegalStateException(ErrorMsg.CANNOT_ANNOUNCE_FINAL_WINNER);
         }
         Result result = record.getFinalResult();
-        List<String> winners = result.getWinners();
+        List<Car> winners = result.getWinners();
         Output.printRaceFinalWinner(winners);
     }
 

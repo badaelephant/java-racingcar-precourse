@@ -17,12 +17,40 @@ public class CarPosition {
         this.position = Rule.START_POSITION;
     }
 
+    public CarPosition(int i) {
+        this.position = i;
+    }
+
     public void moveOneStep() {
         position += Rule.ONE_STEP;
     }
 
-    public int getPosition() {
-        return position;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        CarPosition carPosition = (CarPosition) o;
+        return position == carPosition.position;
     }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(position);
+    }
+
+    public boolean biggerThan(CarPosition p) {
+        return position > p.getPosition();
+    }
+
+    public boolean lesserThan(CarPosition p) {
+        return position < p.getPosition();
+    }
+
+    private int getPosition() {
+        return position;
+    }
 }

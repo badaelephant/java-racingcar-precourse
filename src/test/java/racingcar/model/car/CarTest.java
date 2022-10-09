@@ -2,6 +2,8 @@ package racingcar.model.car;
 
 import org.junit.jupiter.api.Test;
 import racingcar.model.strategy.RandomNumberMoveStrategy;
+
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 public class CarTest {
 
@@ -13,11 +15,11 @@ public class CarTest {
 
         strategy.setMoveLimit(0);
         moveCar.move(strategy);
-        assertEquals(moveCar.getCarPosition(),1);
+        assertThat(moveCar.getCarPosition().equals(new CarPosition(1)));
 
         strategy.setMoveLimit(10);
         stopCar.move(strategy);
-        assertEquals(stopCar.getCarPosition(),0);
+        assertThat(stopCar.getCarPosition().equals(new CarPosition(0)));
     }
 
 }

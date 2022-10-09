@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import racingcar.model.car.Car;
+import racingcar.model.car.CarPosition;
 import racingcar.model.car.Cars;
 import racingcar.view.Output;
 
@@ -19,7 +20,7 @@ public class Result {
     private final int round;
     private final Cars cars;
 
-    private final List<String> winners = new ArrayList<>();
+    private List<Car> winners = new ArrayList<>();
 
     public Result(int round, Cars cars) {
         this.round = round;
@@ -28,23 +29,13 @@ public class Result {
         checkWinner();
     }
 
-    public List<String> getWinners() {
+    public List<Car> getWinners() {
         return winners;
     }
 
     private void checkWinner() {
-        List<Car> carList = cars.getCarList();
-        Collections.sort(carList, Collections.reverseOrder());
-        int winPosition = carList.get(0).getCarPosition();
-        for (Car car : carList) {
-            checkCoWinnerAndAddWinner(winPosition, car);
-        }
-    }
-
-    private void checkCoWinnerAndAddWinner(int winPosition, Car car) {
-        if (car.getCarPosition() == winPosition) {
-            winners.add(car.getCarName());
-        }
+        cars.orderCarsByPosition();
+        winners = cars.getWinners();
     }
 
     public void printResult() {

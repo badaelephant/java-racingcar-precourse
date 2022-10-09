@@ -2,6 +2,7 @@ package racingcar.view;
 
 import java.util.List;
 import racingcar.model.car.Car;
+import racingcar.model.car.CarPosition;
 import racingcar.model.value.ErrorMsg;
 import racingcar.model.value.RaceMsg;
 
@@ -37,7 +38,7 @@ public class Output {
         System.out.println(RaceMsg.RACE_RESULT_INTRODUCE);
     }
 
-    public static void printRaceFinalWinner(List<String> winners) {
+    public static void printRaceFinalWinner(List<Car> winners) {
         System.out.println("\n");
         StringBuilder builder = new StringBuilder();
         builder.append(RaceMsg.FINAL_WINNER);
@@ -48,21 +49,21 @@ public class Output {
         System.out.println(winnerText);
     }
 
-    private static String returnWinnerText(int index, String winner) {
+    private static String returnWinnerText(int index, Car winner) {
         if (index == 0) {
-            return winner;
+            return winner.getCarName().toString();
         }
-        return ", " + winner;
+        return ", " + winner.getCarName().toString();
     }
 
 
     private static void printRoundResultByCar(Car car) {
-        System.out.println(String.format("%s : %s", car.getCarName(), printCarPosition(car.getCarPosition())));
+        System.out.println(String.format("%s : %s", car.getCarName().toString(), printCarPosition(car.getCarPosition())));
     }
 
-    private static String printCarPosition(int position) {
-        StringBuilder builder = new StringBuilder(position);
-        for (int i = 0; i < position; i++) {
+    private static String printCarPosition(CarPosition position) {
+        StringBuilder builder = new StringBuilder();
+        for (int i = 0; position.biggerThan(new CarPosition(i)); i++) {
             builder.append(RaceMsg.PROGRESS_PARTICLE);
         }
         return builder.toString();

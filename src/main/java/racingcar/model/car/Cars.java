@@ -1,6 +1,7 @@
 package racingcar.model.car;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import racingcar.model.strategy.MoveStrategy;
 import racingcar.model.value.ErrorMsg;
@@ -60,4 +61,27 @@ public class Cars {
     }
 
 
+    public void orderCarsByPosition() {
+        Collections.sort(carList, Collections.reverseOrder());
+    }
+
+    public CarPosition getWinningPosition() {
+        return carList.get(0).getCarPosition();
+    }
+
+    public List<Car> getWinners() {
+        List<Car> winningList = new ArrayList<>();
+        CarPosition winningPosition = carList.get(0).getCarPosition();
+        for (Car car: carList){
+            winningList=findCoWinners(winningPosition, car, winningList);
+        }
+        return winningList;
+    }
+
+    private List<Car> findCoWinners(CarPosition winningPosition, Car car,List<Car> winningList) {
+        if(car.getCarPosition().equals(winningPosition)){
+            winningList.add(car);
+        }
+        return winningList;
+    }
 }

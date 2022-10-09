@@ -1,5 +1,6 @@
 package racingcar.controller;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -11,6 +12,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+import racingcar.model.car.Car;
+import racingcar.model.car.CarPosition;
 import racingcar.model.car.Cars;
 import racingcar.model.race.Race;
 import racingcar.model.race.RaceManager;
@@ -55,9 +58,9 @@ public class RaceControllerTest {
         race.setupTrial(trial);
         race.start();
         assertEquals(race.getRaceRecord().getRecordSize(),2);
-        assertEquals(cars.getCarList().get(0).getCarPosition(),2);
-        assertEquals(cars.getCarList().get(1).getCarPosition(),2);
-        List<String> winners = race.getRaceRecord().getFinalResult().getWinners();
+        assertThat(cars.getCarList().get(0).getCarPosition().equals(new CarPosition(2)));
+        assertThat(cars.getCarList().get(1).getCarPosition().equals(new CarPosition(2)));
+        List<Car> winners = race.getRaceRecord().getFinalResult().getWinners();
         assertEquals(winners.size(),2);
     }
 
@@ -68,9 +71,9 @@ public class RaceControllerTest {
         race.setupTrial(trial);
         race.start();
         assertEquals(race.getRaceRecord().getRecordSize(),2);
-        assertEquals(cars.getCarList().get(0).getCarPosition(),0);
-        assertEquals(cars.getCarList().get(1).getCarPosition(),0);
-        List<String> winners = race.getRaceRecord().getFinalResult().getWinners();
+        assertThat(cars.getCarList().get(0).getCarPosition().equals(new CarPosition(0)));
+        assertThat(cars.getCarList().get(1).getCarPosition().equals(new CarPosition(0)));
+        List<Car> winners = race.getRaceRecord().getFinalResult().getWinners();
         assertEquals(winners.size(),2);
     }
 
