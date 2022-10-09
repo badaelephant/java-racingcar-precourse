@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import racingcar.model.strategy.MoveStrategy;
 import racingcar.model.value.ErrorMsg;
+import racingcar.model.value.Rule;
 
 /**
  * 자동차 그룹 객체
@@ -20,14 +21,14 @@ public class Cars {
     }
 
     private void createCarList(final String carNamesInput) {
-        for (String carName : carNamesInput.split(",")) {
+        for (String carName : carNamesInput.split(Rule.SEPARATOR)) {
             carList.add(createCar(carName));
         }
         checkCarListSize();
     }
 
     private void checkCarListSize() {
-        if(carList.size()<2){
+        if (carList.size() < 2) {
             throw new IllegalArgumentException(ErrorMsg.ONE_CAR_NAME);
         }
     }
@@ -39,7 +40,7 @@ public class Cars {
     }
 
     private void validateDuplicatedCarName(final Car car) {
-        if(carList.contains(car)){
+        if (carList.contains(car)) {
             throw new IllegalArgumentException(ErrorMsg.DUPLICATE_NAME);
         }
     }
@@ -54,7 +55,9 @@ public class Cars {
         return carList;
     }
 
-    public int getCarListSize(){ return carList.size();}
+    public int getCarListSize() {
+        return carList.size();
+    }
 
 
 }

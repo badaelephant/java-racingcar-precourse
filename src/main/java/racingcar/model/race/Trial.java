@@ -16,12 +16,12 @@ public class Trial {
     }
 
     private void validateTrialInput(String trialInput) {
-        if(!trialInput.matches(TRIAL_PATTERN)){
+        if (!trialInput.matches(TRIAL_PATTERN)) {
             throw new IllegalArgumentException(ErrorMsg.WRONG_TYPE);
         }
     }
 
-    public int getTotalTrial(){
+    public int getTotalTrial() {
         return trial;
     }
 

@@ -22,5 +22,6 @@ public interface RaceInterface {
     Record getRaceRecord();
 
     void setupCars(Cars cars);
+
     void setupTrial(Trial trial);
 }

@@ -41,7 +41,8 @@ public class RaceController {
             race.setupTrial(trial);
         }
     }
-    public void prepareRace(){
+
+    public void prepareRace() {
         try {
             prepareCars();
             prepareTrial();

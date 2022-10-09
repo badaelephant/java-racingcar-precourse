@@ -15,7 +15,6 @@ public class Rule {
     public static final int MIN_RANDOM = 0;
     public static final int ONE_STEP = 1;
     public static final int START_POSITION = 0;
-    public static final int START_ROUND_NO = 1;
 
     public static final int DEFAULT_TRIAL = 0;
 

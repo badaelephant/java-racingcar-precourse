@@ -21,5 +21,7 @@ public class Record {
         record.add(result);
     }
 
-    public int getRecordSize(){return record.size();}
+    public int getRecordSize() {
+        return record.size();
+    }
 }
