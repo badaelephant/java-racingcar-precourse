@@ -25,10 +25,6 @@ public class RaceController {
         this.race = new Race(moveStrategy);
     }
 
-    private void prepareRace() {
-        prepareCars();
-        prepareTrial();
-    }
 
     private void prepareCars() {
         if (race.requireCarSetUp()) {
@@ -45,14 +41,17 @@ public class RaceController {
             race.setupTrial(trial);
         }
     }
-
-    public void startRace() {
+    public void prepareRace(){
         try {
-            prepareRace();
+            prepareCars();
+            prepareTrial();
         } catch (IllegalArgumentException e) {
             Output.printErrorMsg(e.getMessage());
-            startRace();
+            prepareRace();
         }
+    }
+
+    public void startRace() {
         try {
             race.start();
             race.announceFinalWinner();
