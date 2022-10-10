@@ -1,6 +1,7 @@
 package racingcar.model.car;
 
 import java.util.Objects;
+import racingcar.model.value.RaceMsg;
 import racingcar.model.value.Rule;
 
 /**
@@ -52,5 +53,13 @@ public class CarPosition {
 
     private int getPosition() {
         return position;
+    }
+
+    public String printCarPosition(){
+        StringBuilder builder = new StringBuilder();
+        for (int i = 0; i<position; i++) {
+            builder.append(RaceMsg.PROGRESS_PARTICLE);
+        }
+        return builder.toString();
     }
 }

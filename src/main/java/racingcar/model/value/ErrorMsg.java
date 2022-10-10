@@ -17,4 +17,6 @@ public class ErrorMsg {
     public static final String CAR_NAME_LENGTH_NO_MATCH = "차 이름은 1글자 이상 5글자 이하여야 합니다.";
     public static final String CANNOT_START_RACE_NO_READY = "경기가 준비되어야 시작할 수 있습니다.";
     public static final String CANNOT_ANNOUNCE_FINAL_WINNER = "경기가 안끝나서 최종 우승자를 발표할 수 없습니다.";
+
+    public static final String ZERO_WINNER = "경기의 승자가 없을 수 없습니다.";
 }

@@ -20,6 +20,7 @@ import racingcar.model.race.RaceManager;
 import racingcar.model.race.Record;
 import racingcar.model.race.Result;
 import racingcar.model.race.Trial;
+import racingcar.model.race.Winners;
 import racingcar.model.strategy.RandomNumberMoveStrategy;
 import racingcar.model.value.ErrorMsg;
 
@@ -60,8 +61,8 @@ public class RaceControllerTest {
         assertEquals(race.getRaceRecord().getRecordSize(),2);
         assertThat(cars.getCarList().get(0).getCarPosition().equals(new CarPosition(2)));
         assertThat(cars.getCarList().get(1).getCarPosition().equals(new CarPosition(2)));
-        List<Car> winners = race.getRaceRecord().getFinalResult().getWinners();
-        assertEquals(winners.size(),2);
+        Winners winners = race.getRaceRecord().getFinalResult().getWinners();
+        assertEquals(winners.getWinnerCount(),2);
     }
 
     @Test
@@ -73,8 +74,8 @@ public class RaceControllerTest {
         assertEquals(race.getRaceRecord().getRecordSize(),2);
         assertThat(cars.getCarList().get(0).getCarPosition().equals(new CarPosition(0)));
         assertThat(cars.getCarList().get(1).getCarPosition().equals(new CarPosition(0)));
-        List<Car> winners = race.getRaceRecord().getFinalResult().getWinners();
-        assertEquals(winners.size(),2);
+        Winners winners = race.getRaceRecord().getFinalResult().getWinners();
+        assertEquals(winners.getWinnerCount(),2);
     }
 
     @Test

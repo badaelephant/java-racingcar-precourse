@@ -55,7 +55,7 @@ public class Race implements RaceInterface {
             throw new IllegalStateException(ErrorMsg.CANNOT_ANNOUNCE_FINAL_WINNER);
         }
         Result result = record.getFinalResult();
-        List<Car> winners = result.getWinners();
+        Winners winners = result.getWinners();
         Output.printRaceFinalWinner(winners);
     }
 

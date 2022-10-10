@@ -2,7 +2,9 @@ package racingcar.model.car;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import racingcar.model.strategy.MoveStrategy;
 import racingcar.model.value.ErrorMsg;
 import racingcar.model.value.Rule;
@@ -15,35 +17,33 @@ import racingcar.model.value.Rule;
  */
 public class Cars {
 
-    private final List<Car> carList = new ArrayList<>();
+    private final List<Car> carList;
 
     public Cars(final String carNamesInput) {
-        createCarList(carNamesInput);
+        this.carList = createCarList(carNamesInput);
     }
 
-    private void createCarList(final String carNamesInput) {
+    private List<Car> createCarList(final String carNamesInput) {
+        List<Car> newCarList = new ArrayList<>();
         for (String carName : carNamesInput.split(Rule.SEPARATOR)) {
-            carList.add(createCar(carName));
+            newCarList.add(createCar(carName));
         }
-        checkCarListSize();
+        checkCarList(newCarList);
+        return newCarList;
     }
 
-    private void checkCarListSize() {
-        if (carList.size() < 2) {
+    private void checkCarList(List<Car> newCarList) {
+        Set<Car> carSet = new HashSet<>(newCarList);
+        if(carSet.size() != newCarList.size()){
+            throw new IllegalArgumentException(ErrorMsg.DUPLICATE_NAME);
+        }
+        if (newCarList.size() < 2) {
             throw new IllegalArgumentException(ErrorMsg.ONE_CAR_NAME);
         }
     }
 
     private Car createCar(final String carName) {
-        Car car = new Car(carName);
-        validateDuplicatedCarName(car);
-        return car;
-    }
-
-    private void validateDuplicatedCarName(final Car car) {
-        if (carList.contains(car)) {
-            throw new IllegalArgumentException(ErrorMsg.DUPLICATE_NAME);
-        }
+        return new Car(carName);
     }
 
     public void moveAll(MoveStrategy moveStrategy) {
@@ -69,8 +69,8 @@ public class Cars {
         return carList.get(0).getCarPosition();
     }
 
-    public List<Car> getWinners() {
-        List<Car> winningList = new ArrayList<>();
+    public List<CarName> getWinners() {
+        List<CarName> winningList = new ArrayList<>();
         CarPosition winningPosition = carList.get(0).getCarPosition();
         for (Car car: carList){
             winningList=findCoWinners(winningPosition, car, winningList);
@@ -78,10 +78,16 @@ public class Cars {
         return winningList;
     }
 
-    private List<Car> findCoWinners(CarPosition winningPosition, Car car,List<Car> winningList) {
+    private List<CarName> findCoWinners(CarPosition winningPosition, Car car,List<CarName> winningList) {
         if(car.getCarPosition().equals(winningPosition)){
-            winningList.add(car);
+            winningList.add(car.getCarName());
         }
         return winningList;
+    }
+
+    public void printCarsPositions(){
+        for (Car car : carList) {
+            car.printCarPositionWithName();
+        }
     }
 }

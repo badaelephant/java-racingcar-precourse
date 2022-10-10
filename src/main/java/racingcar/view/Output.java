@@ -3,6 +3,8 @@ package racingcar.view;
 import java.util.List;
 import racingcar.model.car.Car;
 import racingcar.model.car.CarPosition;
+import racingcar.model.car.Cars;
+import racingcar.model.race.Winners;
 import racingcar.model.value.ErrorMsg;
 import racingcar.model.value.RaceMsg;
 
@@ -26,11 +28,9 @@ public class Output {
         System.out.println(ErrorMsg.BASE + e);
     }
 
-    public static void printRoundResult(List<Car> cars) {
+    public static void printRoundResult(Cars cars) {
         System.out.println("\n");
-        for (Car car : cars) {
-            printRoundResultByCar(car);
-        }
+        cars.printCarsPositions();
     }
 
     public static void printRaceStart() {
@@ -38,36 +38,17 @@ public class Output {
         System.out.println(RaceMsg.RACE_RESULT_INTRODUCE);
     }
 
-    public static void printRaceFinalWinner(List<Car> winners) {
+    public static void printRaceFinalWinner(Winners winners) {
         System.out.println("\n");
         StringBuilder builder = new StringBuilder();
         builder.append(RaceMsg.FINAL_WINNER);
-        for (int i = 0; i < winners.size(); i++) {
-            builder.append(returnWinnerText(i, winners.get(i)));
-        }
+        builder.append(winners.printWinner());
         String winnerText = builder.toString();
         System.out.println(winnerText);
     }
 
-    private static String returnWinnerText(int index, Car winner) {
-        if (index == 0) {
-            return winner.getCarName().toString();
-        }
-        return ", " + winner.getCarName().toString();
+
+    public static void printCarPositionByCar(String carPositionWithName) {
+        System.out.println(carPositionWithName);
     }
-
-
-    private static void printRoundResultByCar(Car car) {
-        System.out.println(String.format("%s : %s", car.getCarName().toString(), printCarPosition(car.getCarPosition())));
-    }
-
-    private static String printCarPosition(CarPosition position) {
-        StringBuilder builder = new StringBuilder();
-        for (int i = 0; position.biggerThan(new CarPosition(i)); i++) {
-            builder.append(RaceMsg.PROGRESS_PARTICLE);
-        }
-        return builder.toString();
-    }
-
-
 }

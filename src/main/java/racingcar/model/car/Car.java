@@ -2,6 +2,7 @@ package racingcar.model.car;
 
 import java.util.Objects;
 import racingcar.model.strategy.MoveStrategy;
+import racingcar.view.Output;
 
 /**
  * 자동차 객체
@@ -55,6 +56,10 @@ public class Car implements Comparable<Car> {
     @Override
     public int hashCode() {
         return Objects.hash(getCarName());
+    }
+
+    public void printCarPositionWithName(){
+        Output.printCarPositionByCar(String.format("%s : %s", getCarName().toString(), getCarPosition().printCarPosition()));
     }
 
 }
