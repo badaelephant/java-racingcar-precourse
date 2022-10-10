@@ -55,9 +55,9 @@ public class CarPosition {
         return position;
     }
 
-    public String printCarPosition(){
+    public String printCarPosition() {
         StringBuilder builder = new StringBuilder();
-        for (int i = 0; i<position; i++) {
+        for (int i = 0; i < position; i++) {
             builder.append(RaceMsg.PROGRESS_PARTICLE);
         }
         return builder.toString();

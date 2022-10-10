@@ -47,7 +47,6 @@ public class Output {
         System.out.println(winnerText);
     }
 
-
     public static void printCarPositionByCar(String carPositionWithName) {
         System.out.println(carPositionWithName);
     }

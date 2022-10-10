@@ -36,8 +36,10 @@ public class Car implements Comparable<Car> {
 
     @Override
     public int compareTo(Car c) {
-        if(this.position.lesserThan(c.position))//길이 비교
+        if (this.position.lesserThan(c.position))//길이 비교
+        {
             return -1;
+        }
         return 1;
     }
 
@@ -58,8 +60,9 @@ public class Car implements Comparable<Car> {
         return Objects.hash(getCarName());
     }
 
-    public void printCarPositionWithName(){
-        Output.printCarPositionByCar(String.format("%s : %s", getCarName().toString(), getCarPosition().printCarPosition()));
+    public void printCarPositionWithName() {
+        Output.printCarPositionByCar(
+                String.format("%s : %s", getCarName().toString(), getCarPosition().printCarPosition()));
     }
 
 }

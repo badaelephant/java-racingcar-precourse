@@ -22,6 +22,6 @@ public class Trial {
     }
 
     public boolean biggerThan(int i) {
-        return trial>i;
+        return trial > i;
     }
 }

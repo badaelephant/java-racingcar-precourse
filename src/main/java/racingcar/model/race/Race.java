@@ -30,16 +30,19 @@ public class Race implements RaceInterface {
 
     @Override
     public void start() {
-        if (this.raceStatus != RaceStatus.READY) {
-            throw new IllegalStateException(ErrorMsg.CANNOT_START_RACE_NO_READY);
-        }
-        ;
+        checkRaceStartCondition();
         this.raceStatus = RaceStatus.DRIVING;
         Output.printRaceStart();
         for (int i = 0; trial.biggerThan(i); i++) {
-            runNthRound(i+1);
+            runNthRound(i + 1);
         }
         this.raceStatus = RaceStatus.RACE_OVER;
+    }
+
+    private void checkRaceStartCondition() {
+        if (this.raceStatus != RaceStatus.READY) {
+            throw new IllegalStateException(ErrorMsg.CANNOT_START_RACE_NO_READY);
+        }
     }
 
     private void runNthRound(int round) {

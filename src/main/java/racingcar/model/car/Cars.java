@@ -34,7 +34,7 @@ public class Cars {
 
     private void checkCarList(List<Car> newCarList) {
         Set<Car> carSet = new HashSet<>(newCarList);
-        if(carSet.size() != newCarList.size()){
+        if (carSet.size() != newCarList.size()) {
             throw new IllegalArgumentException(ErrorMsg.DUPLICATE_NAME);
         }
         if (newCarList.size() < 2) {
@@ -72,20 +72,20 @@ public class Cars {
     public List<CarName> getWinners() {
         List<CarName> winningList = new ArrayList<>();
         CarPosition winningPosition = carList.get(0).getCarPosition();
-        for (Car car: carList){
-            winningList=findCoWinners(winningPosition, car, winningList);
+        for (Car car : carList) {
+            winningList = findCoWinners(winningPosition, car, winningList);
         }
         return winningList;
     }
 
-    private List<CarName> findCoWinners(CarPosition winningPosition, Car car,List<CarName> winningList) {
-        if(car.getCarPosition().equals(winningPosition)){
+    private List<CarName> findCoWinners(CarPosition winningPosition, Car car, List<CarName> winningList) {
+        if (car.getCarPosition().equals(winningPosition)) {
             winningList.add(car.getCarName());
         }
         return winningList;
     }
 
-    public void printCarsPositions(){
+    public void printCarsPositions() {
         for (Car car : carList) {
             car.printCarPositionWithName();
         }

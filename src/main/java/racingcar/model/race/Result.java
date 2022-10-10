@@ -21,7 +21,7 @@ public class Result {
     private final int round;
     private final Cars cars;
 
-    private final Winners winners ;
+    private final Winners winners;
 
     public Result(int round, Cars cars) {
         this.round = round;
@@ -29,12 +29,12 @@ public class Result {
         this.winners = new Winners(checkWinners());
     }
 
-
     private List<CarName> checkWinners() {
         cars.orderCarsByPosition();
         return cars.getWinners();
     }
-    public Winners getWinners(){
+
+    public Winners getWinners() {
         return winners;
     }
 
